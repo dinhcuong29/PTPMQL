@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+img {
+  float: right;
+}
+.img1{
+    float: left;
+}
+.img2{
+    float: none;
+}
+
+.div1 {
+  background: red;
+  float: left;
+  padding: 15px; 
+}
+
+.div2 {
+  background: yellow;
+  float: left;
+  padding: 15px; 
+}
+
+.div3 {
+  background: green;
+  float: left;
+  padding: 15px; 
+}
+
+.div4 {
+  border: 3px solid #4CAF50;
+  padding: 5px;
+}
+
+.img3 {
+  float: right;
+}
+
+.img4 {
+  float: right;
+}
+
+.clearfix {
+  overflow: auto;
+}
+.div5 {
+  float: left;
+  padding: 10px;
+  border: 3px solid #73AD21;
+}
+
+.div6 {
+  padding: 10px;
+  border: 3px solid red;
+}
+
+.div7{
+  float: left;
+  padding: 10px;  
+  border: 3px solid #73AD21;
+}
+
+.div8 {
+  padding: 10px;
+  border: 3px solid red;
+  clear: left;
+}
+* {
+  box-sizing: border-box;
+}
+
+.box {
+  float: left;
+  width: 33.33%;
+  padding: 50px;
+}
+
+.clearfix1::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.img-container {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+.clearfix2::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+</style>
+</head>
+<body>
+
+<h2>Float Right Đinh Xuân Cường - 2121050879</h2>
+
+<p>In this example, the image will float to the right in the paragraph, and the text in the paragraph will wrap around the image.</p>
+
+<p><img src="/HTML/img/avatar.png" alt="Pineapple" style="width:170px;height:170px;margin-left:15px;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis diam velit.</p>
+
+
+<h2>Float Left Đinh Xuân Cường - 2121050879</h2>
+
+<p>In this example, the image will float to the left in the paragraph, and the text in the paragraph will wrap around the image.</p>
+
+<p><img class="img1" src="/HTML/img/avatar.png" alt="Pineapple" style="width:170px;height:170px;margin-right:15px;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis diam velit.</p>
+<br>
+<h2>Float None Đinh Xuân Cường - 2121050879</h2>
+
+<p>In this example, the image will be displayed just where it occurs in the text (float: none;).</p>
+
+<p><img class="img2" src="/HTML/img/avatar.png" alt="Pineapple" style="width:170px;height:170px;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis diam velit.</p>
+
+<h2>Float Next To Each Other Đinh Xuân Cường - 2121050879</h2>
+
+<p>In this example, the three divs will float next to each other.</p>
+
+<div class="div1">Div 1</div>
+<div class="div2">Div 2</div>
+<div class="div3">Div 3</div>
+<br>
+<br>
+<h2>Without Clearfix Đinh Xuân Cường - 2121050879</h2>
+
+<p>This image is floated to the right. It is also taller than the element containing it, so it overflows outside of its container:</p>
+
+<div class="div4">
+  <img class="img3" src="/HTML/img/avatar.png" alt="Pineapple" width="170" height="170">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet...
+</div>
+
+<h2 style="clear:right">With Clearfix Đinh Xuân Cường - 2121050879</h2>
+<p>We can fix this by adding a clearfix class with overflow: auto; to the containing element:</p>
+
+<div class="clearfix div4" >
+  <img class="img4" src="/HTML/img/avatar.png" alt="Pineapple" width="170" height="170">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet...
+</div>
+
+<h2>Without clear Đinh Xuân Cường - 2121050879</h2>
+<div class="div5">div5</div>
+<div class="div6">div6 - Notice that div6 is after div5 in the HTML code. However, since div5 floats to the left, the text in div6 flows around div5.</div>
+<br><br>
+
+<h2>With clear Đinh Xuân Cường - 2121050879</h2>
+<div class="div7">div7</div>
+<div class="div8">div8 - Here, clear: left; moves div8 down below the floating div7. The value "left" clears elements floated to the left. You can also clear "right" and "both".</div>
+
+
+<h2>Grid of Boxes Đinh Xuân Cường - 2121050879</h2>
+<p>Float boxes side by side:</p>
+
+<div class="clearfix1">
+  <div class="box" style="background-color:#bbb">
+  <p>Some text inside the box.</p>
+  </div>
+  <div class="box" style="background-color:#ccc">
+  <p>Some text inside the box.</p>
+  </div>
+  <div class="box" style="background-color:#ddd">
+  <p>Some text inside the box.</p>
+  </div>
+</div>
+
+<p><strong>Note:</strong> Here, we use the clearfix hack to take care of the layout flow. 
+We also use the box-sizing property to make sure that the box doesn't break due to extra padding. Try to remove this code to see the effect.</p>
+
+<h2>Images Side by Side Đinh Xuân Cường - 2121050879</h2>
+<p>Float images side by side:</p>
+
+<div class="clearfix2">
+  <div class="img-container">
+  <img src="/HTML/img/avatar.png" alt="Italy" style="width:100%">
+  </div>
+  <div class="img-container">
+  <img src="/HTML/img/avatar.png" alt="Forest" style="width:100%">
+  </div>
+  <div class="img-container">
+  <img src="/HTML/img/avatar.png" alt="Mountains" style="width:100%">
+</body>
+</html>
+
+
+
