@@ -1,8 +1,9 @@
-﻿@{
-    
-}
-
-<div class="text-center">
-    <h1 class="display-4">view student</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+﻿
+<form asp-action="Index">
+        <label for="">Nhập họ tên</label>
+        <input type="text" name="name" placeholder="Họ và tên"><br>
+        <label for="">Nhập địa chỉ</label>
+        <input type="text" name="address" placeholder="Địa chỉ của bạn"><br>
+        <input type="submit" name="" value="Gửi">
+</form>
+@ViewBag.Message

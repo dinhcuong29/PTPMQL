@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "cQf/9sMpKUxDgMyvMfhB4AuYn1WF8KSvtWeqQ+GXATA=",
+  "Hash": "ebHBWa5pBfIopMlrg2Z8LC2Nan5UNPq0W8+6fZ6wNNg=",
   "Source": "FirstWebMVC",
   "BasePath": "_content/FirstWebMVC",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "E:\\PTPMQL\\FirstWebMVC\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FirstWebMVC.bundle.scp.css"
+    },
+    {
+      "Identity": "E:\\PTPMQL\\FirstWebMVC\\wwwroot\\css\\login.css",
+      "SourceId": "FirstWebMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\PTPMQL\\FirstWebMVC\\wwwroot\\",
+      "BasePath": "_content/FirstWebMVC",
+      "RelativePath": "css/login.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\login.css"
     },
     {
       "Identity": "E:\\PTPMQL\\FirstWebMVC\\wwwroot\\css\\site.css",
