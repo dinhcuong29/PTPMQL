@@ -1,0 +1,1 @@
+dotnet aspnet-codegenerator controller -name PersonController -m Person -dc Demomvc.Data.ApplicationDbContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries --databaseProvider sqlite -f
