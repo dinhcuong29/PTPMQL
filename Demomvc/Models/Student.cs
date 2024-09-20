@@ -7,6 +7,7 @@ namespace Demomvc.Models
     {
         [Key]
         public string StudentID{get;set;}
-        public string Name{get;set;}
+        public string Fullname{get;set;}
+        public string Address{get;set;}
     }
 }

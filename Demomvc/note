@@ -1,1 +1,1 @@
-dotnet aspnet-codegenerator controller -name HeThongPhanPhoiController -m HeThongPhanPhoi -dc Demomvc.Data.ApplicationDbContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries --databaseProvider sqlite -f
+dotnet aspnet-codegenerator controller -name StudentController -m Student -dc Demomvc.Data.ApplicationDbContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries --databaseProvider sqlite -f
