@@ -276,3 +276,7 @@ E:\PTPMQL\Demomvc\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Cachin
 E:\PTPMQL\Demomvc\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 E:\PTPMQL\Demomvc\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 E:\PTPMQL\Demomvc\obj\Debug\net8.0\Demomvc.csproj.Up2Date
+E:\PTPMQL\Demomvc\bin\Debug\net8.0\EPPlus.dll
+E:\PTPMQL\Demomvc\bin\Debug\net8.0\EPPlus.Interfaces.dll
+E:\PTPMQL\Demomvc\bin\Debug\net8.0\EPPlus.System.Drawing.dll
+E:\PTPMQL\Demomvc\bin\Debug\net8.0\Microsoft.IO.RecyclableMemoryStream.dll

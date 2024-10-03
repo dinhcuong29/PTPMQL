@@ -7,65 +7,54 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Demomvc.Data;
 using Demomvc.Models;
-
 namespace Demomvc.Controllers
 {
-    public class DaiLyController : Controller
+    public class CustomerController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public DaiLyController(ApplicationDbContext context)
+        public CustomerController(ApplicationDbContext context)
         {
             _context = context;
         }
-
-        // GET: DaiLy
         public async Task<IActionResult> Index()
         {
-            return View(await _context.DaiLy.ToListAsync());
+            return View(await _context.Customer.ToListAsync());
         }
 
-        // GET: DaiLy/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
+        public async Task<IActionResult> Details(string id){
             if (id == null)
             {
                 return NotFound(); 
             }
 
-            var daiLy = await _context.DaiLy
-                .FirstOrDefaultAsync(m => m.MaDaiLy == id);
-            if (daiLy == null)
+            var customer = await _context.Customer
+                .FirstOrDefaultAsync(m => m.CustomerId == id);
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(daiLy);
-        }             
+            return View(customer);
+        }
 
-        // GET: DaiLy/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: DaiLy/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaDaiLy,TenDaiLy,DiaChi,NguoiDaiDien,DienThoai,MaHTPP")] DaiLy daiLy)
+        public async Task<IActionResult> Create([Bind("CustomerId,FullName,Address,Email")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(daiLy);
+                _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(daiLy);
+            return View(customer);
         }
 
-        // GET: DaiLy/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -73,22 +62,19 @@ namespace Demomvc.Controllers
                 return NotFound();
             }
 
-            var daiLy = await _context.DaiLy.FindAsync(id);
-            if (daiLy == null)
+            var customer = await _context.Customer.FindAsync(id);
+            if (customer == null)
             {
                 return NotFound();
             }
-            return View(daiLy);
+            return View(customer);
         }
 
-        // POST: DaiLy/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("MaDaiLy,TenDaiLy,DiaChi,NguoiDaiDien,DienThoai,MaHTPP")] DaiLy daiLy)
+        public async Task<IActionResult> Edit(string id, [Bind("CustomerId,FullName,Address,Email")] Customer customer)
         {
-            if (id != daiLy.MaDaiLy)
+            if (id != customer.CustomerId)
             {
                 return NotFound();
             }
@@ -97,12 +83,12 @@ namespace Demomvc.Controllers
             {
                 try
                 {
-                    _context.Update(daiLy);
+                    _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DaiLyExists(daiLy.MaDaiLy))
+                    if (!CustomerExists(customer.CustomerId))
                     {
                         return NotFound();
                     }
@@ -113,10 +99,9 @@ namespace Demomvc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(daiLy);
+            return View(customer);
         }
 
-        // GET: DaiLy/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -124,34 +109,34 @@ namespace Demomvc.Controllers
                 return NotFound();
             }
 
-            var daiLy = await _context.DaiLy
-                .FirstOrDefaultAsync(m => m.MaDaiLy == id);
-            if (daiLy == null)
+            var customer = await _context.Customer
+                .FirstOrDefaultAsync(m => m.CustomerId == id);
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(daiLy);
+            return View(customer);
         }
 
-        // POST: DaiLy/Delete/5
+        // POST: customer/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var daiLy = await _context.DaiLy.FindAsync(id);
-            if (daiLy != null)
+            var customer = await _context.Customer.FindAsync(id);
+            if (customer != null)
             {
-                _context.DaiLy.Remove(daiLy);
+                _context.Customer.Remove(customer);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DaiLyExists(string id)
+        private bool CustomerExists(string id)
         {
-            return _context.DaiLy.Any(e => e.MaDaiLy == id);
+            return _context.Customer.Any(e => e.CustomerId == id);
         }
     }
 }
