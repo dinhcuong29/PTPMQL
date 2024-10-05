@@ -26,7 +26,7 @@ namespace Demomvc.Controllers
         }
 
         // GET: Person/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -54,7 +54,7 @@ namespace Demomvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PersonID,Fullname,Address,Sđt")] Person person)
+        public async Task<IActionResult> Create([Bind("PersonID,FullName,Address")] Person person)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace Demomvc.Controllers
         }
 
         // GET: Person/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -86,7 +86,7 @@ namespace Demomvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PersonID,Fullname,Address,Sđt")] Person person)
+        public async Task<IActionResult> Edit(string id, [Bind("PersonID,FullName,Address")] Person person)
         {
             if (id != person.PersonID)
             {
@@ -117,7 +117,7 @@ namespace Demomvc.Controllers
         }
 
         // GET: Person/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -137,7 +137,7 @@ namespace Demomvc.Controllers
         // POST: Person/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var person = await _context.Person.FindAsync(id);
             if (person != null)
@@ -149,7 +149,7 @@ namespace Demomvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PersonExists(int id)
+        private bool PersonExists(string id)
         {
             return _context.Person.Any(e => e.PersonID == id);
         }

@@ -34,7 +34,7 @@ namespace Demomvc.Controllers
             }
 
             var employee = await _context.Employee
-                .FirstOrDefaultAsync(m => m.EmployerID == id);
+                .FirstOrDefaultAsync(m => m.PersonID == id);
             if (employee == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace Demomvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployerID,Fullname,Age")] Employee employee)
+        public async Task<IActionResult> Create([Bind("EmployeeID,Company,PersonID,FullName,Address")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace Demomvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("EmployerID,Fullname,Age")] Employee employee)
+        public async Task<IActionResult> Edit(string id, [Bind("EmployeeID,Company,PersonID,FullName,Address")] Employee employee)
         {
-            if (id != employee.EmployerID)
+            if (id != employee.PersonID)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Demomvc.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmployeeExists(employee.EmployerID))
+                    if (!EmployeeExists(employee.PersonID))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace Demomvc.Controllers
             }
 
             var employee = await _context.Employee
-                .FirstOrDefaultAsync(m => m.EmployerID == id);
+                .FirstOrDefaultAsync(m => m.PersonID == id);
             if (employee == null)
             {
                 return NotFound();
@@ -151,7 +151,7 @@ namespace Demomvc.Controllers
 
         private bool EmployeeExists(string id)
         {
-            return _context.Employee.Any(e => e.EmployerID == id);
+            return _context.Employee.Any(e => e.PersonID == id);
         }
     }
 }

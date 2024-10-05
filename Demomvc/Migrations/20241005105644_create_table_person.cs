@@ -5,24 +5,25 @@
 namespace Demomvc.Migrations
 {
     /// <inheritdoc />
-    public partial class person : Migration
+    public partial class create_table_person : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Persons",
+                name: "Person",
                 columns: table => new
                 {
-                    PersonID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Fullname = table.Column<string>(type: "TEXT", nullable: false),
+                    PersonID = table.Column<string>(type: "TEXT", nullable: false),
+                    FullName = table.Column<string>(type: "TEXT", nullable: false),
                     Address = table.Column<string>(type: "TEXT", nullable: false),
-                    sđt = table.Column<int>(type: "INTEGER", nullable: false)
+                    Discriminator = table.Column<string>(type: "TEXT", maxLength: 8, nullable: false),
+                    EmployeeID = table.Column<string>(type: "TEXT", nullable: true),
+                    Company = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Persons", x => x.PersonID);
+                    table.PrimaryKey("PK_Person", x => x.PersonID);
                 });
         }
 
@@ -30,7 +31,7 @@ namespace Demomvc.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Persons");
+                name: "Person");
         }
     }
 }
