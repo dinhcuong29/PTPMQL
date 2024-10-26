@@ -25,6 +25,31 @@ namespace Demomvc.Controllers
             return View(await _context.Person.ToListAsync());
         }
 
+        //Search
+
+        [HttpPost]
+
+        public async Task<IActionResult> Index(string searchString)
+        {
+            if (_context.Person == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Person'  is null.");
+            }
+
+            var person = from m in _context.Person select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                // person = person.Where(s => s.FullName != null && 
+                //            s.FullName.ToUpper().Contains(searchString.ToUpper()));
+                person = person.Where(s => s.FullName != null &&
+                                   EF.Functions.Like(s.FullName, $"%{searchString.Trim()}%"));
+
+            }
+
+            return View(await person.ToListAsync());
+        }
+
         // GET: Person/Details/5
         public async Task<IActionResult> Details(string id)
         {
@@ -57,10 +82,13 @@ namespace Demomvc.Controllers
         public async Task<IActionResult> Create([Bind("PersonID,FullName,Address")] Person person)
         {
             if (ModelState.IsValid)
+            // Kiểm tra thỏa mãn các điều kiện ở model
             {
                 _context.Add(person);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
+                //Data Anotayion
             }
             return View(person);
         }
