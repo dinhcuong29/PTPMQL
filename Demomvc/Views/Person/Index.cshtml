@@ -1,4 +1,6 @@
 @model IEnumerable<Demomvc.Models.Person>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
 
 @{
     ViewData["Title"] = "Index";
@@ -11,8 +13,20 @@
     <input type="submit" value="Tìm Kiếm" />
 </form>
 
+<br>
+    <form asp-action="Upload" method="post" enctype="multipart/form-data">
+        <div class="row form-control">
+            <label class="col-sm-4">Import data from Excel :</label>
+            <input type="file" name="file" class="col-sm-6">
+            <input type="submit" value="Upload" class="btn btn-primary col-sm-1">
+        </div>
+   </form>
+
+<br>
+
 <p>
     <a asp-action="Create">Create New</a>
+    <a asp-action="DownLoad" class="btn btn-success">DownLoad</a>
 </p>
 <table class="table">
     <thead>
@@ -44,3 +58,4 @@
 }
     </tbody>
 </table>
+
