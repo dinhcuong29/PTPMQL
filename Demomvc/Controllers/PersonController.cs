@@ -10,7 +10,8 @@ using Demomvc.Models;
 using Demomvc.Models.Process;
 using OfficeOpenXml;
 using X.PagedList;
-using X.PagedList.Mvc.Core;
+using X.PagedList.Extensions;
+
 
 namespace Demomvc.Controllers
 {
@@ -25,10 +26,10 @@ namespace Demomvc.Controllers
         }
 
         // GET: Person
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Person.ToListAsync());
-        }
+        // public async Task<IActionResult> Index()
+        // {
+        //     return View(await _context.Person.ToListAsync());
+        // }
 
         //Search
 
@@ -56,11 +57,13 @@ namespace Demomvc.Controllers
         }
 
         //Phân Trang 
-        // public async Task<IActionResult> Index(int? page)
-        // {
-        //     var model = _context.Person.ToList().ToPagedList(page ?? 1, 5);
-        //     return View(model);
-        // }
+        public async Task<IActionResult> Index(int? page)
+        {
+            var model = _context.Person.ToList().ToPagedList(page ?? 1, 5);
+            return View(model);
+        }
+
+        
 
         // GET: Person/Details/5
         public async Task<IActionResult> Details(string id)

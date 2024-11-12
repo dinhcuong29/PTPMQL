@@ -1,1 +1,2 @@
 dotnet aspnet-codegenerator controller -name StudentController -m Student -dc Demomvc.Data.ApplicationDbContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries --databaseProvider sqlite -f
+dotnet aspnet-codegenerator identity -dc Demomvc.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout" -f
