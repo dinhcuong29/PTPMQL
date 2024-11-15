@@ -1,15 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Demomvc.Data;
-using Demomvc.Models;
+using Demomvc.Models.Entities;
 
 namespace Demomvc.Controllers
 {
+    [Authorize]
+    //Yêu cầu đăng nhập mới được truy cập
+    
     public class StudentController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,13 +20,17 @@ namespace Demomvc.Controllers
         }
 
         // GET: Student
+
+        [AllowAnonymous]
+        //Truy cập mà không cần xác thực
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Student.ToListAsync());
         }
 
         // GET: Student/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -54,7 +58,7 @@ namespace Demomvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StudentID,FullName")] Student student)
+        public async Task<IActionResult> Create([Bind("StudentID,FirstName,LastName,Address,DateofBirth,Position,Email,HireDate")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +70,7 @@ namespace Demomvc.Controllers
         }
 
         // GET: Student/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -86,7 +90,7 @@ namespace Demomvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("StudentID,FullName")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("StudentID,FirstName,LastName,Address,DateofBirth,Position,Email,HireDate")] Student student)
         {
             if (id != student.StudentID)
             {
@@ -117,7 +121,7 @@ namespace Demomvc.Controllers
         }
 
         // GET: Student/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -137,7 +141,7 @@ namespace Demomvc.Controllers
         // POST: Student/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var student = await _context.Student.FindAsync(id);
             if (student != null)
@@ -149,7 +153,7 @@ namespace Demomvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StudentExists(string id)
+        private bool StudentExists(int id)
         {
             return _context.Student.Any(e => e.StudentID == id);
         }

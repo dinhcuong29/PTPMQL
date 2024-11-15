@@ -33,28 +33,28 @@ namespace Demomvc.Controllers
 
         //Search
 
-        [HttpPost]
+        // [HttpPost]
 
-        public async Task<IActionResult> Index(string searchString)
-        {
-            if (_context.Person == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Person'  is null.");
-            }
+        // public async Task<IActionResult> Index(string searchString)
+        // {
+        //     if (_context.Person == null)
+        //     {
+        //         return Problem("Entity set 'ApplicationDbContext.Person'  is null.");
+        //     }
 
-            var person = from m in _context.Person select m;
+        //     var person = from m in _context.Person select m;
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                // person = person.Where(s => s.FullName != null && 
-                //            s.FullName.ToUpper().Contains(searchString.ToUpper()));
-                person = person.Where(s => s.FullName != null &&
-                                   EF.Functions.Like(s.FullName, $"%{searchString.Trim()}%"));
+        //     if (!String.IsNullOrEmpty(searchString))
+        //     {
+        //         // person = person.Where(s => s.FullName != null && 
+        //         //            s.FullName.ToUpper().Contains(searchString.ToUpper()));
+        //         person = person.Where(s => s.FullName != null &&
+        //                            EF.Functions.Like(s.FullName, $"%{searchString.Trim()}%"));
 
-            }
+        //     }
 
-            return View(await person.ToListAsync());
-        }
+        //     return View(await person.ToListAsync());
+        // }
 
         //Phân Trang 
         public async Task<IActionResult> Index(int? page)
@@ -63,7 +63,29 @@ namespace Demomvc.Controllers
             return View(model);
         }
 
-        
+        // Tìm Kiếm + Phân Trang
+        [HttpPost]
+        public async Task<IActionResult> Index(int? page, string searchString)
+        {
+            if (_context.Person == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Person' is null.");
+            }
+
+            var person = from m in _context.Person select m;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                person = person.Where(s => s.FullName != null &&
+                                           EF.Functions.Like(s.FullName, $"%{searchString.Trim()}%"));
+            }
+
+            var pagedModel = person.ToPagedList(page ?? 1, 5);
+
+            return View(pagedModel);
+        }
+
+
 
         // GET: Person/Details/5
         public async Task<IActionResult> Details(string id)
