@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Demomvc.Data;
 using Demomvc.Models.Entities;
+using X.PagedList.Extensions;
+using Demomvc.Models.Process;
 
 namespace Demomvc.Controllers
 {
@@ -24,12 +26,19 @@ namespace Demomvc.Controllers
         [AllowAnonymous]
         //Truy cập mà không cần xác thực
 
-        public async Task<IActionResult> Index()
+        // public async Task<IActionResult> Index()
+        // {
+        //     return View(await _context.Student.ToListAsync());
+        // }
+         [Authorize(Policy = nameof(SystemPermissions.ViewStudent))]
+        public async Task<IActionResult> Index(int? page)
         {
-            return View(await _context.Student.ToListAsync());
+            var model = _context.Student.ToList().ToPagedList(page ?? 1, 5);
+            return View(model);
         }
 
         // GET: Student/Details/5
+        // [Authorize(Roles = "Student")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,7 +56,9 @@ namespace Demomvc.Controllers
             return View(student);
         }
 
+        [Authorize(Policy = nameof(SystemPermissions.CreateStudent))]
         // GET: Student/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -70,6 +81,8 @@ namespace Demomvc.Controllers
         }
 
         // GET: Student/Edit/5
+        // [Authorize(Roles = "Admin")]
+        [Authorize(Policy = nameof(SystemPermissions.EditStudent))]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -121,6 +134,8 @@ namespace Demomvc.Controllers
         }
 
         // GET: Student/Delete/5
+        // [Authorize(Roles = "Admin")]
+        [Authorize(Policy = nameof(SystemPermissions.DeleteStudent))]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

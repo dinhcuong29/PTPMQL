@@ -1,4 +1,6 @@
 @model IEnumerable<Demomvc.Models.Entities.Student>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
 
 @{
     ViewData["Title"] = "Index";
@@ -69,3 +71,12 @@
 }
     </tbody>
 </table>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new
+    {
+        page = page,
+
+    }), new PagedListRenderOptions
+{
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" }
+})

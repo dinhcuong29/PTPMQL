@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Demomvc.Data;
 using Demomvc.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Demomvc.Models.Process;
 
 namespace Demomvc.Controllers
 {
+    // [Authorize(Policy = "PolicyStudent")]
     public class MemberUnitController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,12 +23,14 @@ namespace Demomvc.Controllers
         }
 
         // GET: MemberUnit
+        [Authorize(Policy = nameof(SystemPermissions.ViewMemberUnit))]
         public async Task<IActionResult> Index()
         {
             return View(await _context.MemberUnit.ToListAsync());
         }
 
         // GET: MemberUnit/Details/5
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +49,8 @@ namespace Demomvc.Controllers
         }
 
         // GET: MemberUnit/Create
+        //  [Authorize(Policy = "PolicyAdmin")]
+        [Authorize(Policy = nameof(SystemPermissions.CreateMemberUnit))]
         public IActionResult Create()
         {
             return View();
@@ -66,6 +73,7 @@ namespace Demomvc.Controllers
         }
 
         // GET: MemberUnit/Edit/5
+        [Authorize(Policy = nameof(SystemPermissions.EditMemberUnit))]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -117,6 +125,7 @@ namespace Demomvc.Controllers
         }
 
         // GET: MemberUnit/Delete/5
+        [Authorize(Policy = nameof(SystemPermissions.DeleteMemberUnit))]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

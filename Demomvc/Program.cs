@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Demomvc.Models.Process;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authorization;
 
 
 
@@ -19,13 +21,24 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")
 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.")));
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-.AddEntityFrameworkStores<ApplicationDbContext>();
 
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddAuthorization(options =>
+{
+    foreach (var permission in Enum.GetValues(typeof(SystemPermissions)).Cast<SystemPermissions>())
+    {
+        options.AddPolicy(permission.ToString(), policy =>
+        policy.RequireClaim("Permission", permission.ToString()));
+    }
+    // options.AddPolicy("Role",policy =>policy.RequireClaim("Role","AdminOnly"));
+    // options.AddPolicy("Permission",policy =>policy.RequireClaim("Role","StudentOnly"));
+    // options.AddPolicy("PolicyAdmin",policy =>policy.RequireRole("Admin"));
+    // options.AddPolicy("PolicyStudent",policy =>policy.RequireRole("Student"));
+    // options.AddPolicy("PolicyByPhoneNumber",policy =>policy.Requirements.Add(new PolicyByPhoneNumberRequirement()));
+});
+builder.Services.AddSingleton<IAuthorizationHandler, PolicyByPhoneNumberHandler>();
 // Cấu hình các tùy chọn Identity cho ASP.NET Core
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -118,7 +131,25 @@ builder.Services.AddDataProtection()
 
 
 
+builder.Services.AddRazorPages();
+
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => 
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    options.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultProvider;
+})
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
+
 builder.Services.AddTransient<StudentSeeder>();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
 
 var app = builder.Build();
 
